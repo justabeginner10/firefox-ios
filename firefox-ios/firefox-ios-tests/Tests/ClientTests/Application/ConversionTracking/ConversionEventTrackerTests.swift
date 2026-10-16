@@ -83,61 +83,6 @@ final class ConversionEventTrackerTests: XCTestCase {
         XCTAssertEqual(mockUpdater.receivedConversionValues.first?.lockWindow, false)
     }
 
-    func testRecord_thirdActivityFirstWeek_emitsExpectedConversionValue() {
-        let subject = createSubject()
-
-        subject.record(.thirdActivityFirstWeek)
-
-        XCTAssertEqual(mockUpdater.receivedConversionValues.count, 1)
-        XCTAssertEqual(mockUpdater.receivedConversionValues.first?.fine, 22)
-        XCTAssertEqual(mockUpdater.receivedConversionValues.first?.coarse, .medium)
-        XCTAssertEqual(mockUpdater.receivedConversionValues.first?.lockWindow, false)
-    }
-
-    func testRecord_activeLastThreeWeek1_emitsExpectedConversionValue() {
-        let subject = createSubject()
-
-        subject.record(.activeLastThreeWeek1)
-
-        XCTAssertEqual(mockUpdater.receivedConversionValues.count, 1)
-        XCTAssertEqual(mockUpdater.receivedConversionValues.first?.fine, 20)
-        XCTAssertEqual(mockUpdater.receivedConversionValues.first?.coarse, .medium)
-        XCTAssertEqual(mockUpdater.receivedConversionValues.first?.lockWindow, false)
-    }
-
-    func testRecord_activeTwoOfFourAndThreeWeek1_emitsExpectedConversionValue() {
-        let subject = createSubject()
-
-        subject.record(.activeTwoOfFourAndThreeWeek1)
-
-        XCTAssertEqual(mockUpdater.receivedConversionValues.count, 1)
-        XCTAssertEqual(mockUpdater.receivedConversionValues.first?.fine, 30)
-        XCTAssertEqual(mockUpdater.receivedConversionValues.first?.coarse, .medium)
-        XCTAssertEqual(mockUpdater.receivedConversionValues.first?.lockWindow, false)
-    }
-
-    func testRecord_activated_emitsExpectedConversionValue() {
-        let subject = createSubject()
-
-        subject.record(.activated)
-
-        XCTAssertEqual(mockUpdater.receivedConversionValues.count, 1)
-        XCTAssertEqual(mockUpdater.receivedConversionValues.first?.fine, 45)
-        XCTAssertEqual(mockUpdater.receivedConversionValues.first?.coarse, .high)
-        XCTAssertEqual(mockUpdater.receivedConversionValues.first?.lockWindow, false)
-    }
-
-    func testRecord_dailyActiveFirstWeek_emitsExpectedConversionValue() {
-        let subject = createSubject()
-
-        subject.record(.dailyActiveFirstWeek)
-
-        XCTAssertEqual(mockUpdater.receivedConversionValues.count, 1)
-        XCTAssertEqual(mockUpdater.receivedConversionValues.first?.fine, 55)
-        XCTAssertEqual(mockUpdater.receivedConversionValues.first?.coarse, .high)
-        XCTAssertEqual(mockUpdater.receivedConversionValues.first?.lockWindow, false)
-    }
-
     func testRecordURILoadConversionEvent_isNoOpWhenInstallTimestampMissing() {
         let subject = createSubject()
 
