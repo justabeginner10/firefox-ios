@@ -33,29 +33,6 @@ struct ConversionEventTracker {
             // Days index starts at 0 so day 2 is index 1
             record(.appOpenDay2Plus)
         }
-
-        let active = dataManager.activeDayIndices
-        let searched = dataManager.searchedDayIndices
-
-        let week1Active = active.intersection(0...6)
-        let firstFourActive = active.intersection(0...3)
-        let lastThreeActive = active.intersection(4...6)
-
-        if week1Active.count >= 3 {
-            record(.thirdActivityFirstWeek)
-        }
-        if !lastThreeActive.isEmpty {
-            record(.activeLastThreeWeek1)
-        }
-        if firstFourActive.count >= 2 && lastThreeActive.count >= 2 {
-            record(.activeTwoOfFourAndThreeWeek1)
-        }
-        if Set(0...6).isSubset(of: active) {
-            record(.dailyActiveFirstWeek)
-        }
-        if week1Active.count >= 3 && !searched.intersection(3...6).isEmpty {
-            record(.activated)
-        }
     }
 
     func record(_ event: ConversionEvent) {
@@ -75,12 +52,6 @@ enum ConversionEvent {
     case appOpenDay2Plus
     case uriLoadDay2Plus
     case firstAdClick
-    // Delete
-    case thirdActivityFirstWeek
-    case activeLastThreeWeek1
-    case dailyActiveFirstWeek
-    case activated
-    case activeTwoOfFourAndThreeWeek1
 
     var conversionValue: ConversionValue {
         switch self {
@@ -94,22 +65,6 @@ enum ConversionEvent {
             return .init(fine: 25, coarse: .high, lockWindow: false)
         case .firstAdClick:
             return .init(fine: 35, coarse: .medium, lockWindow: false)
-        // Delete
-        case .activeTwoOfFourAndThreeWeek1:
-            // We don't want a coarse conversion value here
-            return .init(fine: 30, coarse: .medium, lockWindow: false)
-        case .activated:
-            // We don't want a coarse conversion value here
-            return .init(fine: 45, coarse: .high, lockWindow: false)
-        case .dailyActiveFirstWeek:
-            // We don't want a coarse conversion value here
-            return .init(fine: 55, coarse: .high, lockWindow: false)
-        case .activeLastThreeWeek1:
-            // We don't want a coarse conversion value here
-            return .init(fine: 20, coarse: .low, lockWindow: false)
-        case .thirdActivityFirstWeek:
-            // We don't want a coarse conversion value here
-            return .init(fine: 22, coarse: .low, lockWindow: false)
         }
     }
 }
